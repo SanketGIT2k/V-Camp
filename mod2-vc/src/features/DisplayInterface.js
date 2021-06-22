@@ -27,7 +27,7 @@ function DisplayInterface() {
             axios.get(`/get/conversation?id=${channelId}`).then((res)=>{
                 setMessages(res.data[0].conversation)
             })
-        }
+        } 
     }
 
     useEffect (() =>{

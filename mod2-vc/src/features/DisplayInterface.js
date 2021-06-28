@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 import { selectChannelId, selectChannelName } from './appSlice';
 import axios from './axios';
 
-import {motion} from 'framer-motion'
+import {AnimatePresence, motion} from 'framer-motion'
 
 function DisplayInterface() {
 
@@ -26,6 +26,7 @@ function DisplayInterface() {
         if (channelId){
             axios.get(`/get/conversation?id=${channelId}`).then((res)=>{
                 setMessages(res.data[0].conversation)
+                console.log(res.data[0].conversation)
             })
         } 
     }
@@ -43,23 +44,36 @@ function DisplayInterface() {
             user:user
         })
         setInput('')
+        getConversation(channelId)
     }
 
     return (
         <div className='chat'>
             <DisplayIntHeader channelName={channelName} />
 
+            <AnimatePresence>
+
             <div className="chat__messages">
                { messages.map((message) => {
-                    <Message
-                        timestamp={message.timestamp}
-                        message={message.message}
-                        user={message.user} />
+                   return(
+                       <motion.div animate={{opacity:1}} initial={{opacity:0}}>
+                            <Message
+                                timestamp={message.timestamp}
+                                message={message.message}
+                                user={message.user} />
+                        </motion.div>
+               )
+               
                 })}
+                
             </div>
+            
+            </AnimatePresence>
 
             <div className="chat__input">
-                <AddCircleIcon fontSize="large" />
+                <AddCircleIcon  />
+
+
                 <form>
                     <input value={input} disabled={!channelId} onChange = {(e) => setInput(e.target.value)} placeholder={`Message #TestChannel`} />
                     <button disabled={!channelId} className='chat__inputButton' type='submit' onClick={sendMessage}>

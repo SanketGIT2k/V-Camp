@@ -13,6 +13,9 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mongoose": "^5.12.5"
+    "express-fileupload": "^1.2.1",
+    "fileupload": "^1.0.0",
+    "mongoose": "^5.12.5",
+    "socket.io": "^4.1.2"
   }
 }

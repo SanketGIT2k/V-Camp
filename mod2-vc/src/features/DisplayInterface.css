@@ -1,22 +1,22 @@
 .chat {
   display: flex;
   flex-direction: column;
-  flex: 0.77;
-  background-color: darkslategray;
+  flex: 0.8;
+  background-color: white(231, 231, 231);
   height: 100vh;
 }
 
 .chat__input {
-  color: lightgray;
+  color: #dcdcdc;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 15px;
   border-radius: 5px;
   margin: 20px;
-  border-top: 1px solid gray;
-  background-color: darkgrey;
-  height: 30px;
+  color: #696969;
+  background-color: #dcdcdc;
+  height: 15px;
 }
 
 .chat__input > form > input {
@@ -43,4 +43,8 @@
 
 .chat__messages {
   flex: 1;
+}
+
+.chat__inputIcons :hover {
+  color: black;
 }

@@ -4,6 +4,9 @@ export const userSlice = createSlice({
   name: 'user',
   initialState:{
     user:null,
+    userEmail: null,
+    status: null,
+    userid: null
   },
   reducers: {
     login: (state,action) => {

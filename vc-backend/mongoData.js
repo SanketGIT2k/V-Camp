@@ -2,6 +2,20 @@ import mongoose from 'mongoose'
 
 const vcSchema = mongoose.Schema({
     channelName: String,
+
+    user: [
+        {
+        userName: String,
+        userEmail: String,
+        userFiles: [
+                    {
+                        fileName: String,
+                    }
+                 ]
+        
+        }
+    ],
+
     conversation: [
         {
             message: String,

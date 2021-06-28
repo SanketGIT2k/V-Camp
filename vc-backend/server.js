@@ -3,9 +3,22 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 import mongoData from './mongoData.js'
 
+import fileUpload from 'express-fileupload'
+
 //app config
 const app = express()
 const port = process.env.port || 8002
+
+app.use(fileUpload());
+app.use(express.static("public"));
+
+// const cors = require("cors")
+// const io = require("socket.io")(server,{
+//     cors:{
+//         origin:"*",
+//         methods: ["GET" , "POST"]
+//     }
+// })
 
 const router = express.Router()
 
@@ -61,6 +74,12 @@ app.get('/get/channelList', (req,res)=>{
     })
 })
 
+app.delete('/channelList',async (req,res) => {
+    const channelId = req.query.channelId;
+    await mongoData.findOneAndDelete({"_id":channelId})
+
+})
+
 app.post('/new/message', (req,res)=>{
 
     mongoData.findOneAndUpdate(
@@ -80,6 +99,8 @@ app.post('/new/message', (req,res)=>{
         }
         })
 })
+
+
 
 app.get('/get/data',(req,res)=>{
     mongoData.find((err,data)=>{
@@ -106,6 +127,59 @@ app.get('/get/conversation', (req,res)=>{
     })
     
 })
+
+app.post('/uploadFile', async (req,res) => {
+
+const userFile = req.files.file
+console.log("ok ok",userFile.name)
+userFile.mv('public/userFiles/'+userFile.name, function(err){
+
+    if(err){
+        res.json({status:"file not uploaded"});
+    }
+
+  else  {
+    // const userFileName = req.files.userFile.name; 
+    mongoData.findOneAndUpdate(
+        {_id: req.query.id},
+        {$push: {conversation: req.body}},
+        (err, data)=>{
+            if(err){
+
+            console.log("Error saving the message: ")
+            console.log(err)
+
+            res.status(500).send(err)
+
+            }  
+         else{
+            res.status(201).send(data)
+        }
+        })
+    
+
+    res.json({status:"insertion successfull!"});
+
+        }
+    })
+})
+
+
+// io.on('connection', (socket) => {
+//     socket.on('join-room', (roomId, userId) => {
+//       socket.join(roomId)
+//       socket.to(roomId).broadcast.emit('user-connected', userId);
+//       // messages
+//       socket.on('message', (message) => {
+//         //send message to the same room
+//         io.to(roomId).emit('createMessage', message)
+//       });
+  
+//       socket.on('disconnect', () => {
+//         socket.to(roomId).broadcast.emit('user-disconnected', userId)
+//       })
+//     })
+//   })
 
 //listen
 app.listen(port, ()=>console.log(`listening on localhost:${port}`))

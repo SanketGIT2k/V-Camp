@@ -1,5 +1,7 @@
 * {
   margin: 0px;
+  text-decoration: none;
+  scroll-snap-type: y mandatory;
 }
 
 body {
@@ -14,4 +16,18 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+@keyframes drop-down {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
 }

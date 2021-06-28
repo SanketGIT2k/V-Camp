@@ -7,6 +7,14 @@ import {selectUser} from "./features/userSlice"
 import CreateRoom from './features/CreateRoom'
 import Room from './features/Room'
 
+import Header from './features/homepage/HomepageHeader';
+import Home from './features/homepage/Home'
+
+import SignupForm from './features/loginSignup/SignupForm';
+
+import UserProfiles from './features/UserProfiles';
+
+
 import {BrowserRouter, Route, Switch} from "react-router-dom"
 
 
@@ -14,6 +22,10 @@ function App() {
 
   const user = useSelector(selectUser);
   return (
+
+    <BrowserRouter>
+
+    <switch>
     <div className="App">
     {/* {user ? (
       <div>
@@ -23,19 +35,27 @@ function App() {
       <h2>You need to login </h2>
     )} */}
 
-    {/* <Sidebar />
-    <DisplayInterface /> */}
+      <Sidebar />
+      <DisplayInterface />
 
-    <BrowserRouter>
-      <Switch>
-        <Route path="/" exact component={CreateRoom}/>
-        <Route path="/room/:roomID" component={Room} />
-      </Switch>
-    </BrowserRouter>
+      {/* <SignupForm /> */}
 
-      
-     
+      {/* <Header />
+      <Home /> */}
+
+    {/* <UserProfiles /> */}
+
+    {/* <LoginForm /> */}    
+
     </div>
+     
+
+    </switch>
+
+    
+
+</BrowserRouter>
+
   );
 }
 

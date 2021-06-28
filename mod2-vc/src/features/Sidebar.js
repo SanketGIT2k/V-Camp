@@ -11,6 +11,8 @@ import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import { Avatar } from '@material-ui/core';
 import CallIcon from '@material-ui/icons/Call';
 
+import { AnimatePresence } from 'framer-motion';
+
 import SidebarChannel from './SidebarChannel';
 import Call from '@material-ui/icons/Call';
 
@@ -22,7 +24,7 @@ import {motion} from 'framer-motion'
 
 function Sidebar() {
     const user = useSelector(selectUser)
-    const [state, setState] = useState(false)
+    const [state, setState] = useState(true)
     const [channels, setChannels] = useState([])
 
     const getChannels = () =>{  
@@ -31,6 +33,8 @@ function Sidebar() {
             setChannels(res.data)
         })
     }
+
+
 
     useEffect(() => {
         getChannels()
@@ -41,6 +45,7 @@ function Sidebar() {
 
         if (channelName){
             axios.post('/new/channel',{channelName})
+            window.location.reload()
         }
     }
 
@@ -53,8 +58,10 @@ function Sidebar() {
 
             <div className="sidebar__channels">
                 <div className="sidebar__channelsHeader">
-                    <div className="sidebar__header" onClick ={() => setState(!state)}> 
+                    <div className="sidebar__header" onClick ={() => setState(!state)}>
                         <ExpandMoreIcon  />
+                        
+                            
                         <h4>Text Channels</h4>
                         
                     </div>
@@ -62,23 +69,49 @@ function Sidebar() {
                     <AddIcon onClick = {handleAddChannel} className="sidebar__addChannel"/>
                     
                 </div>
-
+                
                 <div className="sidebar__channelsList">
-                    {state && (
-                        channels.map(channel=>(
-                            <SidebarChannel key={channel.id} id={channel.id} channel={channel.name}/>
+
+                <AnimatePresence>
+                        {state && ( 
+                        channels.map((channel, i)=>(
+                            <motion.div variants={{
+                                hidden: {
+                                    y:-50,
+                                    opacity: 0
+                                },
+                                visible: (i) => ({
+                                    opacity: 1,
+                                    y: 0,
+                                    transition: {
+                                        delay: i * 0.1,
+                                        
+                                    }
+                                }),
+                                exitHidden:{
+                                    y:-50,
+                                    opacity:0
+                                }
+                            }} animate='visible' initial='hidden' exit='exitHidden' custom={i} >
+                                    <SidebarChannel key={channel.id} id={channel.id} channel={channel.name}/>
+                            </motion.div>
+                            
                         ))
-                    )}
+                         )}
+
+                         </AnimatePresence>
+                    
                 </div>
+                
 
             </div>
 
             <div className="sidebar__voice">
-                <SignalCellularAltIcon className="sidebar__voiceIcon" fontSize="large"
+                <SignalCellularAltIcon className="sidebar__voiceIcon" 
                 />
 
                 <div className="sidebar__voiceInfo">
-                    <h3>Voice Connected</h3>
+                    <h4>Voice Connected</h4>
                     <p>Stream</p>
                 </div>
 
@@ -92,8 +125,8 @@ function Sidebar() {
             <div className="sidebar__profile">
                 <Avatar />
                 <div className="sidebar__profileInfo">
-                    <h3>@sanke_coder</h3>
-                    <p>#This is my rollcall</p>
+                    <h4>@sanke_coder</h4>
+                    <p>#Rollcall</p>
                 </div>
 
                 <div className="sidebar__profileIcons">

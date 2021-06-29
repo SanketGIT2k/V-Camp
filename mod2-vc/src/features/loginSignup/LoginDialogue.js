@@ -10,6 +10,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import './LoginDialogue.css'
 import SimpleSelect from '.././SharedComponents/SimpleSelect'
 
+import {auth, provider} from "../../Firebase/firebase";
+
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
 
@@ -20,6 +22,11 @@ export default function FormDialog() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const signIn = () => {
+      auth.signInWithPopup(provider)
+      .catch((error) => alert(error.message));
+  }
 
   return (
     <div>
@@ -59,6 +66,9 @@ export default function FormDialog() {
           </Button>
           <Button onClick={handleClose} color="primary">
             Submit
+          </Button>
+          <Button onClick={signIn} color="primary">
+            Google
           </Button>
         </DialogActions>
       </Dialog>

@@ -1,0 +1,29 @@
+.popover {
+  margin-bottom: 500px;
+  color: transparent;
+  background: transparent;
+}
+
+.popoverPhones {
+  height: 30vh;
+  width: 50vh;
+  padding-bottom: 50px;
+  color: transparent;
+  background: transparent;
+}
+
+.popoverPhones:hover {
+  color: transparent;
+  background: transparent;
+}
+
+.contact-details p {
+  font-size: 15px;
+}
+
+.contact-details a:hover {
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 400;
+  color: plum;
+}

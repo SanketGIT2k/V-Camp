@@ -19,7 +19,7 @@ function Home() {
 
             <Section
                 title="About Us" 
-                description="   " 
+                description=" " 
                 backgroundImg="about-us2.jpg" 
                 
             />
@@ -32,7 +32,7 @@ function Home() {
 
             <Section 
                 title="Contact Us" 
-                description="Order online with touchless delivery" 
+                description="Click on the telephones for contacts." 
                 backgroundImg="contact-us.jpg" 
                 
             />

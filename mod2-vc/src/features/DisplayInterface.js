@@ -31,6 +31,8 @@ function DisplayInterface() {
         } 
     }
 
+    console.log(user)
+
     useEffect (() =>{
         getConversation(channelId)
     },[channelId])
@@ -41,7 +43,7 @@ function DisplayInterface() {
         axios.post(`/new/message?id=${channelId}`,{
             message: input,
             timestamp: Date.now(),
-            user:user
+            user: user
         })
         setInput('')
         getConversation(channelId)
@@ -75,7 +77,7 @@ function DisplayInterface() {
 
 
                 <form>
-                    <input value={input} disabled={!channelId} onChange = {(e) => setInput(e.target.value)} placeholder={`Message #TestChannel`} />
+                    <input value={input} disabled={!channelId} onChange = {(e) => setInput(e.target.value)} placeholder={`Message # ${channelName}`} />
                     <button disabled={!channelId} className='chat__inputButton' type='submit' onClick={sendMessage}>
                         Send Message
                     </button>

@@ -21,6 +21,7 @@ import { useSelector } from 'react-redux';
 import { selectUser } from './userSlice';
 
 import {motion} from 'framer-motion'
+import {auth, provider} from "../Firebase/firebase";
 
 function Sidebar() {
     const user = useSelector(selectUser)
@@ -123,10 +124,10 @@ function Sidebar() {
             </div>
 
             <div className="sidebar__profile">
-                <Avatar />
+                <Avatar onClick={()=>auth.signOut()} src={user.photo} />
                 <div className="sidebar__profileInfo">
-                    <h4>@sanke_coder</h4>
-                    <p>#Rollcall</p>
+                    <h4>{user.displayName}</h4>
+                    <p>#{user.uid.substring(0,5)}</p>
                 </div>
 
                 <div className="sidebar__profileIcons">

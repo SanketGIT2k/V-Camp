@@ -81,7 +81,7 @@ app.delete('/channelList',async (req,res) => {
 })
 
 app.post('/new/message', (req,res)=>{
-
+    const newMessage = req.body
     mongoData.findOneAndUpdate(
         {_id: req.query.id},
         {$push: {conversation: req.body}},

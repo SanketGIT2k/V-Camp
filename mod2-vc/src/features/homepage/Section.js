@@ -24,10 +24,21 @@ function Section({title , description, backgroundImg, leftBtnText, rightBtnText,
 
             {
                 title==="Contact Us" && 
+
+
                 <ContactUsPopover>
-                    <Popover mobile="8058240215" linkedIn="asfff" mail="sanket.sharma.2000@gmail.com" />
-                    <Popover mobile="8058240215" linkedIn="asfff" mail="sanket.sharma.2000@gmail.com" />
-                    <Popover mobile="8058240215" linkedIn="asfff" mail="sanket.sharma.2000@gmail.com" />
+                    <div className="pop1">
+                        <Popover name="Harsh Gauttam" mobile="8227050810" linkedIn="https://www.linkedin.com/in/harsh-gauttam-5898b8199/" mail="harshgauttamofficial@gmail.com" />
+                    </div>
+                    
+                    <div className="pop1">
+                        <Popover name="Sanket Sharma" mobile="8058240215" linkedIn="https://www.linkedin.com/in/sanket-sharma-250647198/" mail="sanket.sharma.2000@gmail.com" />
+                    </div>
+
+                    <div className="pop1">
+                        <Popover name="Madhav Yadav" mobile="9928390365" linkedIn="https://www.linkedin.com/in/madhav-yadav-3300331a2/" mail="madhavyadav@jklu.edu.in" />
+                    </div>
+                    
                 </ContactUsPopover>
             }
 
@@ -215,8 +226,11 @@ const AboutDes = styled.div `
 const ContactUsPopover = styled.div `
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 
-    
+    div{
+        margin: 20px;
+    }
 
 `
 

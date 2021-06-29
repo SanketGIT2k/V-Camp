@@ -4,12 +4,13 @@ import Fade from 'react-reveal/Fade';
 
 import Card from '../Card'
 
-import Popup from "../Popup"
 
+import SignupDialogue from "../loginSignup/SignupDialogue"
+
+import LoginDialogue from "../loginSignup/LoginDialogue"
+import Popover from "../SharedComponents/Popover"
 
 function Section({title , description, backgroundImg, leftBtnText, rightBtnText, cards }) {
-
-    const [openPopup, setOpenPopup] = useState(false)
  
     return ( 
         <Wrap bgImg={backgroundImg} >
@@ -22,20 +23,13 @@ function Section({title , description, backgroundImg, leftBtnText, rightBtnText,
             </Fade>
 
             {
-                title ==="Welcome to your Virtual Campus" && 
-
-                <div>
-                    <Popup
-                        openPopup = {openPopup}
-                        setOpenPopup = {setOpenPopup}
-                    >
-
-                    </Popup>
-                </div>
-
-
+                title==="Contact Us" && 
+                <ContactUsPopover>
+                    <Popover mobile="8058240215" linkedIn="asfff" mail="sanket.sharma.2000@gmail.com" />
+                    <Popover mobile="8058240215" linkedIn="asfff" mail="sanket.sharma.2000@gmail.com" />
+                    <Popover mobile="8058240215" linkedIn="asfff" mail="sanket.sharma.2000@gmail.com" />
+                </ContactUsPopover>
             }
-
 
             {
                         title==="About Us" && 
@@ -58,21 +52,16 @@ SUMMARY
 
             <Buttons>
 
-                
-
                 <Fade bottom>
 
                 <ButtonGroup>
                     {leftBtnText &&
-                        <LeftButton>
-                            {leftBtnText}
-                        </LeftButton>
+                        
+                        <LoginDialogue />
                     }
 
                     { rightBtnText && 
-                        <RightButton>
-                            {rightBtnText}
-                        </RightButton>  
+                        <SignupDialogue />
                     } 
 
                     { title==="Developers" &&
@@ -163,7 +152,7 @@ const LeftButton = styled.div `
 const RightButton = styled(LeftButton) `
 
     background-color: white;
-    opacity  0.65;
+    opacity:  0.65;
     color: black;
     
 `
@@ -221,5 +210,13 @@ const AboutDes = styled.div `
         font-weight: 100    ;
         font-size: 20px;
     }
+`
+
+const ContactUsPopover = styled.div `
+    display: flex;
+    flex-direction: row;
+
+    
+
 `
 

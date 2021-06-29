@@ -35,13 +35,13 @@ function App() {
       <h2>You need to login </h2>
     )} */}
 
-      <Sidebar />
-      <DisplayInterface />
+      {/* <Sidebar />
+      <DisplayInterface /> */}
 
       {/* <SignupForm /> */}
 
-      {/* <Header />
-      <Home /> */}
+      <Header />
+      <Home />
 
     {/* <UserProfiles /> */}
 

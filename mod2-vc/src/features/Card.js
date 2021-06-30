@@ -8,9 +8,12 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
+
 const useStyles = makeStyles({
   root: {
-    width: "300px",
+    marginTop: "50px",
+    width: "250px",
+    height: "300px",
     marginBottom: "80px",
     display: "flex",
     justifyContent: "center",
@@ -19,7 +22,7 @@ const useStyles = makeStyles({
 
   },
   media: {
-    height: "140px",
+    height: "250px",
   },
 });
 
@@ -27,12 +30,12 @@ export default function MediaCard( {userName, userDescription, userImage} ) {
   const classes = useStyles();
 
   return (
+    <div className="main_card">
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="/static/images/cards/contemplative-reptile.jpg"
-          title="Contemplative Reptile"
+          image={userImage}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
@@ -52,5 +55,6 @@ export default function MediaCard( {userName, userDescription, userImage} ) {
         </Button>
       </CardActions> */}
     </Card>
+    </div>
   );
 }

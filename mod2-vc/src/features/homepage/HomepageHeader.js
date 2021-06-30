@@ -17,7 +17,7 @@ function Header() {
         <BrowserRouter>
 
         <Container>
-            <a>
+            <a href="#homeLink">
                 <img src="../images/logo.png" />
             </a>
 
@@ -26,9 +26,9 @@ function Header() {
                     <a key={index} href="#">{car}</a> 
                 ))} */}
                 
-                <a  href="#">AboutUs</a> 
-                <a  href="#">Developers</a> 
-                <a  href="#">ContactUs</a> 
+                <a  href="#aboutLink">AboutUs</a> 
+                <a  href="#developerLink">Developers</a> 
+                <a  href="#contactLink">ContactUs</a> 
                 
             </Menu>
 

@@ -10,24 +10,30 @@ import SignupDialogue from "../loginSignup/SignupDialogue"
 import LoginDialogue from "../loginSignup/LoginDialogue"
 import Popover from "../SharedComponents/Popover"
 
+import Sanket from "../../imagesSrc/Sanket.png"
+import Harsh from "../../imagesSrc/Harsh.png"
+import Madhav from "../../imagesSrc/Madhav2.png"
+
 function Section({title , description, backgroundImg, leftBtnText, rightBtnText, cards }) {
  
     return ( 
         <Wrap bgImg={backgroundImg} >
             <Fade bottom>
             <ItemText>
+            { title==="Welcome to your Virtual Campus" && <div id="homeLink"></div>}
                 <h1>{title}</h1>
                 <p>{description}</p>
             </ItemText>  
 
             </Fade>
+            
 
             {
                 title==="Contact Us" && 
 
 
-                <ContactUsPopover>
-                    <div className="pop1">
+                <ContactUsPopover id="contactLink">
+                    <div className="pop1" >
                         <Popover name="Harsh Gauttam" mobile="8227050810" linkedIn="https://www.linkedin.com/in/harsh-gauttam-5898b8199/" mail="harshgauttamofficial@gmail.com" />
                     </div>
                     
@@ -44,19 +50,12 @@ function Section({title , description, backgroundImg, leftBtnText, rightBtnText,
 
             {
                         title==="About Us" && 
-                        <AboutDes>
+                        <AboutDes id="aboutLink">
                             <p>
-                            Not only are pineapples rich in nutrients, they are also loaded with healthy antioxidants.
-
-Antioxidants are molecules that help your body combat oxidative stress.
-
-Oxidative stress is a state in which there are too many free radicals in the body. These free radicals interact with the body’s cells and cause damage that is linked to chronic inflammation, a weakened immune system and many harmful diseases (5Trusted Source, 6Trusted Source).
-
-Pineapples are especially rich in antioxidants known as flavonoids and phenolic acids (7Trusted Source).
-
-What’s more, many of the antioxidants in pineapple are bound. This allows the antioxidants to survive harsher conditions in the body and produce longer lasting effects (8Trusted Source, 9Trusted Source).
-
-SUMMARY
+                                Our goal is to provide our users with all the functionalities that a user would require 
+                                in a campus. This means making text communications, video communication, file sharing, mentor
+                                mentee meetings platform and many more features. We crave for prviding quality user experience with
+                                a feature rich application.
                             </p>
                         </AboutDes>
                     }
@@ -65,7 +64,7 @@ SUMMARY
 
                 <Fade bottom>
 
-                <ButtonGroup>
+                <ButtonGroup >
                     {leftBtnText &&
                         
                         <LoginDialogue />
@@ -77,19 +76,21 @@ SUMMARY
 
                     { title==="Developers" &&
 
-                    <CardView id="dev">
+                    <CardView id="developerLink">
                         <Card 
                         userName="Sanket Sharma"
-                        userDescription="DEVELUUUPERRR"
+                        
+                        userImage={Sanket}
                          />
                         <Card 
                         userName="Harsh Gauttam"
-                        userDescription="Gendu"
-
+                        
+                        userImage={Harsh}
                         />
                         <Card 
                             userName="Madhav Yadav"
-                            userDescription="lendi"
+                            
+                            userImage={Madhav}
                         />
 
                     </CardView> 
@@ -218,6 +219,7 @@ const AboutDes = styled.div `
     margin-left: 50vw;
     
     p{
+        margin-top: 100px;
         font-weight: 100    ;
         font-size: 20px;
     }

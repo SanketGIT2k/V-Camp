@@ -35,8 +35,6 @@ function Sidebar() {
         })
     }
 
-
-
     useEffect(() => {
         getChannels()
     }, [])

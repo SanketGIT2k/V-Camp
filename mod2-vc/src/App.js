@@ -60,19 +60,9 @@ function App() {
       </div>
     )}
 
-      
-
-      
-
-    {/* <UserProfiles /> */}
- 
-
     </div>
      
-
     </switch>
-
-    
 
 </BrowserRouter>
 

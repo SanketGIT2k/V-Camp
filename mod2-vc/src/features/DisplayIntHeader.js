@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './DisplayIntHeader.css'
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import EditLocationRoundedIcon from '@material-ui/icons/EditLocationRounded';
@@ -8,14 +8,54 @@ import SendRoundedIcon from '@material-ui/icons/SendRounded';
 import HelpRoundedIcon from '@material-ui/icons/HelpRounded';
 import AddIcon from '@material-ui/icons/Add';
 
+import {firebaseApp} from '../Firebase/firebase'
+import db from '../Firebase/firebase'
+
 import axios from './axios';
 import axioss from 'axios';
 
+import { useSelector } from 'react-redux';
+import { selectUser } from './userSlice';
+import { setUseProxies } from 'immer';
+
 function DisplayIntHeader({channelName}) {
+    const user = useSelector(selectUser)
 
     const [Files , setFiles] = useState({file:"",})
+    const [userDb, serUserDb] = useState([])
 
     const {file} = Files
+
+    const [fileUrl, setFileUrl] = useState(null)
+
+    const onFileChange = async (e) =>{
+        const file = e.target.files[0]
+        const storageRef = firebaseApp.storage().ref()
+        const fileRef = storageRef.child(file.name)
+        await fileRef.put(file)
+        setFileUrl (await fileRef.getDownloadURL()) 
+            
+    }
+
+    const onSubmit = (e) => {
+        e.preventDefault()
+        const username = user.displayName
+        console.log(username)
+
+        db.collection("users").doc(username).set({
+            name:username,
+            avatar: fileUrl
+        })
+    }
+
+    useEffect (() =>{
+        const fetchUsers = async () => {
+            const usersCollection = await db.collection('users').get()
+            setUseProxies(usersCollection.docs.map(doc =>{
+                return doc.data()
+            }))
+        }
+    }, [])
 
     const handleFileUpload = (e) =>{
 
@@ -58,9 +98,10 @@ function DisplayIntHeader({channelName}) {
             </div>
 
             <div className="chatHeader__right">
-                <input onChange={handleFileUpload} className="insert__files" id="act-btn" type="file" hidden name="file"/>
-                <label for="act-btn"  > <AddIcon  className="add__file"/> </label>
-                
+                <div onChange={onSubmit}>
+                    <input onChange={onFileChange} className="insert__files" id="act-btn" type="file" hidden name="file"/>
+                    <label for="act-btn"  > <AddIcon  className="add__file"/> </label>
+                </div>
                 <EditLocationRoundedIcon />
                 <PeopleAltRoundedIcon />
 
